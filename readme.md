@@ -1,72 +1,93 @@
-
-# BDDUC
+# BDD UC
 
 **Base De Datos Unificada y Comunitaria 📚**
 
-## SetUp
+## Requisitos
 
-### Python
+- Python >= 3.11
+- Crear un archivo `.env` utilizando las variables definidas en `.ENV_TEMPLATE`
 
-Se utiliza python `3.9` para el desarrollo.
-Esta versión puede ser instalada con [pyenv][pyenv]:
+## Ejecución
 
-```bash
-pyenv install 3.9
-pyenv local 3.9
+```shell
+# api
+poetry run uvicorn src.api.main:app --reload
+# scraper manual
+poetry run scrapy crawl <spider_name> # Opcional: -o items.json
 ```
 
-Además se necesita tener instalado [poetry][poetry].
-Se pueden instalar las dependencias con:
+### Linter y Formatter
 
-```bash
-poetry install
-```
-[pyenv]: https://github.com/pyenv/pyenv#simple-python-version-management-pyenv
-[poetry]: https://python-poetry.org/
+Para mantener la consistencia en el código y respetar el pep8, hay que instalar y usar ruff y black.
 
-### Base de Datos
+### Dependencias
 
-Se necesita tener instalado [PostgreSQl][postgresql-download].
-Además se necesita activar la extensión [PostGIS][postgis], que se
-puede hacer con:
+Para listar las dependencias del proyecto usaremos poetry.
 
-```psql
-CREATE EXTENSION IF NOT EXISTS postgis;
-```
+<details>
+  <summary><strong>Instalación de Poetry</strong> (haz clic para expandir)</summary>
 
-[postgresql-download]: https://www.postgresql.org/download/
-[postgis]: https://postgis.net/documentation/
+#### Linux, macOS, Windows (WSL):
 
-## Variables de entorno
+Con brew:
 
-Hay que rellenar las variable de entorno locales en un archivo `.env`.
-Se puede obtener el template con:
-
-```bash
-cp .env.template .template
+```shell
+brew install poetry
 ```
 
-## Correr el servidor
+sin:
 
-```bash
-uvicorn src.api.main:app --reload
+```shell
+curl -sSL https://install.python-poetry.org | python3 -
 ```
 
-## Documentación
+#### Windows (Powershell)
 
-La documentación se encuentra en `docs` y puede ser generada
-gracias a [mkdocs-material][mkdocs-material] con:
-
-```bash
-# de forma estática
-mkdocs build -d docs-site
-# servidor de desarrollo
-mkdocs serve
+```shell
+(Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | py -
 ```
-[mkdocs-material]: https://squidfunk.github.io/mkdocs-material/
 
-## Tests
+</details>
 
-```bash
-python -m pytest
+```shell
+brew install --cask chromedriver
 ```
+
+#### Actualización de Dependencias
+
+Para agregar nuevas dependencias, utiliza:
+
+```shell
+poetry add <nombre-del-paquete>
+```
+
+Y para actualizar las dependencias existentes:
+
+```shell
+poetry update
+```
+
+## Tareas:
+
+- [] Actualizar devcontainers a la nueva estructura
+- [] Actualizar scripts y revisar que se puede simplificar
+- [] Actualizar documentación
+- [] Agregar diagrama ER
+
+# Agradecimientos
+
+- [Nicolás Mc](https://github.com/nico-mac)
+- [Andrés aurmeneta](https://github.com/aurmeneta)
+- [Benjamín Vicente](https://github.com/benjavicente)
+- [Gabriel Faundez](https://github.com/FarDust)
+- [Ignacio Porte Stefoni](https://github.com/IgnacioPorte)
+- [Emmanuel Norambuena](https://github.com/eanorambuena)
+- [Lucas Natero](https://github.com/lnatero)
+- [Diego Costa](https://github.com/diegocostares)
+
+## referencias
+
+Otros proyectos de los cuales sirvieron de inspiración y estructura
+
+- https://github.com/aurmeneta/HorarioUC
+- https://github.com/aurmeneta/BuscaCursosUC/tree/master

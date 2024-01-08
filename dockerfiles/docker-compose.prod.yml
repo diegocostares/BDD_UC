@@ -5,7 +5,15 @@ services:
       context: .
     volumes:
       - ./log:/workspace/log
-    command: [ "uvicorn", "--port", "8000", "--host", "0.0.0.0", "src.api:app" ]
+    command:
+      [
+        "uvicorn",
+        "--port",
+        "8000",
+        "--host",
+        "0.0.0.0",
+        "src.api:app"
+      ]
 
   server:
     build:

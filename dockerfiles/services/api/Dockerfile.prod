@@ -1,4 +1,4 @@
-FROM python:3.10-slim AS gen-requirements
+FROM python:3.11-slim AS gen-requirements
 WORKDIR /workspace
 
 # Base steps that doesn't require external files
@@ -9,7 +9,7 @@ RUN python -m venv .venv
 COPY pyproject.toml poetry.lock ./
 RUN poetry export -f requirements.txt -o requirements.txt --without-hashes
 
-FROM python:3.10-slim AS server
+FROM python:3.11-slim AS server
 WORKDIR /workspace
 RUN apt-get update
 RUN apt-get -y install libpq-dev gcc g++

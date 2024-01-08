@@ -1,7 +1,7 @@
 # La diferencia de desarrollo y producción es simplemente
 # la opción de reloading, que se puede dejar en docker-compose
 
-FROM python:3.10
+FROM python:3.11
 WORKDIR /workspace
 
 RUN pip install "poetry>=1,<2"

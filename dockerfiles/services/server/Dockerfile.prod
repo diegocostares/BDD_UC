@@ -1,5 +1,5 @@
 # Hay que generar la documentación, que consiste en arhcivos estáticos
-FROM python:3.10 AS doc-generator
+FROM python:3.11 AS doc-generator
 WORKDIR /workspace
 
 # Install

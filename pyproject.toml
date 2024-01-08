@@ -1,0 +1,59 @@
+[tool.poetry]
+name = "BDDUC"
+version = "0.2.0"
+description = ""
+authors = ["diegocostares <diegocostar@uc.cl>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+scrapy = "^2.11.0"
+datetime = "^5.4"
+psycopg2-binary = "^2.9.9"
+fastapi = "^0.108.0"
+uvicorn = "^0.25.0"
+pydantic = "^2.5.3"
+sqlalchemy = "^2.0.25"
+pydantic-settings = "^2.1.0"
+sqlalchemy-utils = "^0.41.1"
+mkdocs-material = "^9.5.3"
+mkdocs-git-revision-date-localized-plugin = "^1.2.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.ruff]
+select = [
+    "F",   # flake8: Combination of common code smells
+    "E",   # pyflakes: Error-prone code constructs
+    "W",   # pycodestyle: Warning code smells that may lead to issues
+    "C90", # cyclomatic-complexity: Cyclomatic complexity threshold (recommended < 90)
+    "N",   # flake8: Naming violations
+    # "ANN",   # flake8: Annotations and metadata about the code
+    "ASYNC", # flake8: Asynchronous code issues
+    "S",     # flake8: Securing code issues
+    "SIM",   # flake8: Simplicity recommendations
+    # "RUF",   # Recommendations from Ruff
+    "NPY", # flake8: New peripherals or features related issues
+]
+
+ignore = [
+    "B008",   # Do not perform function call in argument defaults (to allow `arg = Depends()`)
+    "ANN201",
+    "ANN202", # Missing return type annotation (sometimes return types are too complex)
+    "S101",   # Use of `assert` detected (debug assertions are useful)
+    "TCH001", # Pydantic relies heavily on runtime type reflection
+    "ANN101", # Missing type annotation for self in method
+    "E402",   # Module level import not at top of file
+    "S311",   # Standard pseudo-random
+    "F401",
+]
+
+line-length = 120
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.mccabe]
+max-complexity = 15

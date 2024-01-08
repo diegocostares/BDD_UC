@@ -7,7 +7,16 @@ services:
       - ./src:/workspace/src
       - ./readme.md:/workspace/readme.md
       - ./log:/workspace/log
-    command: [ "uvicorn", "--port", "8000", "--host", "0.0.0.0", "--reload", "src.api:app" ]
+    command:
+      [
+        "uvicorn",
+        "--port",
+        "8000",
+        "--host",
+        "0.0.0.0",
+        "--reload",
+        "src.api:app"
+      ]
 
   docs:
     build:
@@ -19,7 +28,7 @@ services:
       - ./.git:/workspace/.git
     networks:
       - public
-    command: ["mkdocs", "serve", "--dev-addr", "0.0.0.0:8080"]
+    command: [ "mkdocs", "serve", "--dev-addr", "0.0.0.0:8080" ]
 
   server:
     image: nginx:1.21
