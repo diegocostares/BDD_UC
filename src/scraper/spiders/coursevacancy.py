@@ -1,21 +1,22 @@
 import scrapy
 
+from src.db.database_services import get_nrcs_from_bd
 from src.scraper.items import CourseVacancyItem
 from src.scraper.utils import current_semester
 
-
-def obtener_nrcs_de_bd():
-    # TODO
-    return ["22392"]
+from ...config import config
 
 
 class CourseVacancyScraper(scrapy.Spider):
-    name = "course_vacancy_scraper"
+    name = "coursevacancyscraper"
     allowed_domains = ["proxy-buscacursos-diego-costa-dg2vxpylqa-uc.a.run.app"]
 
     def start_requests(self):
         base_url = "https://proxy-buscacursos-diego-costa-dg2vxpylqa-uc.a.run.app/informacionVacReserva.ajax.php"
-        nrcs = obtener_nrcs_de_bd()
+        if config.environment == "dev":
+            nrcs = ["12241", "12247", "12251", "12256", "12262", "12267", "12271", "12276", "12282", "23690", "24169"]
+        else:
+            nrcs = get_nrcs_from_bd()
         term = current_semester()
 
         for nrc in nrcs:

@@ -7,6 +7,10 @@ import scrapy
 
 
 class StartBuscacursosItem(scrapy.Item):
+    """
+    Si se quiere buscar el id hay que usar nrc y current_semester.
+    """
+
     general_area = scrapy.Field()
     nrc = scrapy.Field()
     code = scrapy.Field()
@@ -18,13 +22,13 @@ class StartBuscacursosItem(scrapy.Item):
     format = scrapy.Field()
     category = scrapy.Field()
     name = scrapy.Field()
-    teachers = scrapy.Field()
+    teachers = scrapy.Field()  # TODO: por implementar
     campus = scrapy.Field()
     credits = scrapy.Field()
     total_vacancy = scrapy.Field()  # No se usa
     available_vacancy = scrapy.Field()  # No se usa
     reserved_vacancy = scrapy.Field()  # No se usa
-    schedule = scrapy.Field()
+    schedule = scrapy.Field()  # TODO: por implementar
     current_semester = scrapy.Field()
 
 

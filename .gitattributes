@@ -1,2 +1,0 @@
-Dockerfile.* linguist-language=Dockerfile
-nginx.conf.* linguist-language=nginx

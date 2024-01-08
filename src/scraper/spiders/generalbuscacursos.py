@@ -29,7 +29,7 @@ class GeneralBuscacursosSpider(scrapy.Spider):
         if config.environment == "dev":
             campus_options = ["Casa Central"]
             siglas = ["MED"]
-        elif config.environment == "prod":
+        else:
             campus_options = ["Campus Externo", "Casa Central", "Lo Contador", "Oriente", "San Joaquín", "Villarrica"]
             siglas = generate_siglas()
         for campus, sigla in itertools.product(campus_options, siglas):
