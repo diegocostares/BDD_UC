@@ -1,3 +1,5 @@
+import logging
+
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -5,6 +7,7 @@ from sqlalchemy_utils import create_database, database_exists
 
 from ..config import config
 from .models import (
+    Base,
     CourseCatalog,
     CourseSection,
     CourseSectionBannerVacancy,
@@ -14,7 +17,7 @@ from .models import (
     VacancyDetail,
 )
 
-Base = declarative_base()
+logger = logging.getLogger("bdd_uc")
 
 
 def get_engine(user: str, password: str, db_name: str, host: str, driver: str = "postgresql"):
@@ -40,7 +43,9 @@ Session = sessionmaker(bind=engine)
 
 def create_db(clean: bool = False):
     if clean:
+        logger.debug("Dropping all tables")
         Base.metadata.drop_all(engine)
+    logger.debug("Creating all tables")
     Base.metadata.create_all(engine)
 
 

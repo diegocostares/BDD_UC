@@ -21,9 +21,9 @@ FEED_EXPORT_ENCODING = "utf-8"
 COOKIES_ENABLED = True
 
 # Pipelines: Mientras más bajo el número, más temprano se ejecuta
-# ITEM_PIPELINES = {
-#     "src.scraper.pipelines.StartBuscacursosPipeline": 300,
-# }
+ITEM_PIPELINES = {
+    "src.scraper.pipelines.StartBuscacursosPipeline": 300,
+}
 
 LOG_STDOUT = True
 

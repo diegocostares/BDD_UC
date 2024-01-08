@@ -1,3 +1,5 @@
+import uuid
+
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import declarative_base, relationship
@@ -8,7 +10,7 @@ Base = declarative_base()
 class CourseCatalog(Base):
     __tablename__ = "course_catalog"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(UUID, primary_key=True, default=uuid.uuid4)
     name = Column(String)
     credits = Column(Integer)
     code = Column(String)
@@ -27,7 +29,7 @@ class CourseCatalog(Base):
 class CourseSection(Base):
     __tablename__ = "course_section"
 
-    id = Column(UUID, primary_key=True)
+    id = Column(UUID, primary_key=True, default=uuid.uuid4)
     nrc = Column(String)
     code = Column(String)
     allows_withdraw = Column(String)
@@ -51,7 +53,7 @@ class CourseSection(Base):
 class CourseSectionSchedule(Base):
     __tablename__ = "course_section_schedule"
 
-    id = Column(UUID, primary_key=True)
+    id = Column(UUID, primary_key=True, default=uuid.uuid4)
     type = Column(String)
     day = Column(String)
     module = Column(Integer)
@@ -63,7 +65,7 @@ class CourseSectionSchedule(Base):
 class Teacher(Base):
     __tablename__ = "teacher"
 
-    id = Column(UUID, primary_key=True)
+    id = Column(UUID, primary_key=True, default=uuid.uuid4)
     name = Column(String)
     email = Column(String)
     photo_url = Column(String)
@@ -74,8 +76,10 @@ class Teacher(Base):
 class CourseTeacher(Base):
     __tablename__ = "course_teacher"
 
-    course_section_id = Column(UUID, ForeignKey("course_section.id"), primary_key=True)
-    teacher_id = Column(UUID, ForeignKey("teacher.id"), primary_key=True)
+    # TODO: revisar
+    # TODO: revisar el , default=uuid.uuid4
+    course_section_id = Column(UUID, ForeignKey("course_section.id"), primary_key=True, default=uuid.uuid4)
+    teacher_id = Column(UUID, ForeignKey("teacher.id"), primary_key=True, default=uuid.uuid4)
     course_section = relationship("CourseSection", back_populates="teachers")
     teacher = relationship("Teacher", back_populates="course_teachers")
 
@@ -83,7 +87,7 @@ class CourseTeacher(Base):
 class CourseSectionBannerVacancy(Base):
     __tablename__ = "course_section_banner_vacancy"
 
-    id = Column(UUID, primary_key=True)
+    id = Column(UUID, primary_key=True, default=uuid.uuid4)
     course_section_id = Column(UUID, ForeignKey("course_section.id"))
     banner = Column(Integer)
     course_section = relationship("CourseSection", back_populates="banner_vacancies")
@@ -93,7 +97,9 @@ class CourseSectionBannerVacancy(Base):
 class VacancyDetail(Base):
     __tablename__ = "vacancy_detail"
 
-    course_section_banner_vacancy_id = Column(UUID, ForeignKey("course_section_banner_vacancy.id"), primary_key=True)
+    course_section_banner_vacancy_id = Column(
+        UUID, ForeignKey("course_section_banner_vacancy.id"), primary_key=True, default=uuid.uuid4
+    )
     school = Column(String)
     level = Column(String)
     program = Column(String)

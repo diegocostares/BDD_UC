@@ -21,9 +21,9 @@ class StartBuscacursosItem(scrapy.Item):
     teachers = scrapy.Field()
     campus = scrapy.Field()
     credits = scrapy.Field()
-    total_vacancy = scrapy.Field()
-    available_vacancy = scrapy.Field()
-    reserved_vacancy = scrapy.Field()
+    total_vacancy = scrapy.Field()  # No se usa
+    available_vacancy = scrapy.Field()  # No se usa
+    reserved_vacancy = scrapy.Field()  # No se usa
     schedule = scrapy.Field()
     current_semester = scrapy.Field()
 
