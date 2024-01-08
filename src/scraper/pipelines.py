@@ -117,6 +117,25 @@ class StartBuscacursosPipeline(BasePipeline):
             current_semester=item["current_semester"],
             course_catalog=catalog,
         )
-        # TODO: implementar logica de CourseTeacher, Teacher y CourseSectionSchedule
         session.add(course_section)
+        # CourseSectionSchedule
+        for schedule_item in item.get("schedule", []):
+            schedule = CourseSectionSchedule(
+                type=schedule_item["type"],
+                day=schedule_item["day"],
+                module=schedule_item["module"],
+                classroom=schedule_item.get("classroom"),
+                course_section=course_section,
+            )
+            session.add(schedule)
+
+        # Teacher y CourseTeacher
+        for teacher_name in item.get("teachers", []):
+            teacher = session.query(Teacher).filter_by(name=teacher_name).first()
+            if not teacher:
+                teacher = Teacher(name=teacher_name)
+                session.add(teacher)
+
+            course_teacher = CourseTeacher(course_section=course_section, teacher=teacher)
+            session.add(course_teacher)
         session.commit()
