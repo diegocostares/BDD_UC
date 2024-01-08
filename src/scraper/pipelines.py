@@ -65,7 +65,8 @@ class CourseVacancyPipeline(BasePipeline):
         if not banner_vacancy:
             banner_vacancy = CourseSectionBannerVacancy(
                 course_section_id=course_section.id,
-                banner=item.get("banner", 0),  # TODO: manejar banners
+                banner=item.get("banner", "0"),
+                date=item.get("date", None),
             )
             session.add(banner_vacancy)
 

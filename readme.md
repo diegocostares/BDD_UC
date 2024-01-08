@@ -69,10 +69,11 @@ poetry update
 
 ## Tareas:
 
-- [] Actualizar devcontainers a la nueva estructura
-- [] Actualizar scripts y revisar que se puede simplificar
+- [] Actualizar `devcontainers` a la nueva estructura
+- [] Actualizar `scripts` y revisar que se puede simplificar
 - [] Actualizar documentación
 - [] Agregar diagrama ER
+- [] IMPORTANTE: Ver si usar `asyncio`
 
 # Agradecimientos
 

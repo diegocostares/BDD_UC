@@ -1,3 +1,5 @@
+import time
+
 import scrapy
 
 from src.db.database_services import get_nrcs_from_bd
@@ -10,6 +12,11 @@ from ...config import config
 class CourseVacancyScraper(scrapy.Spider):
     name = "coursevacancyscraper"
     allowed_domains = ["proxy-buscacursos-diego-costa-dg2vxpylqa-uc.a.run.app"]
+
+    def __init__(self, banner=None, *args, **kwargs):
+        super(CourseVacancyScraper, self).__init__(*args, **kwargs)
+        self.banner = banner
+        self.date = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
     def start_requests(self):
         base_url = "https://proxy-buscacursos-diego-costa-dg2vxpylqa-uc.a.run.app/informacionVacReserva.ajax.php"
@@ -39,7 +46,8 @@ class CourseVacancyScraper(scrapy.Spider):
             item["offered"] = safe_int(row.xpath("td[7]/text()").get().strip())
             item["occupied"] = safe_int(row.xpath("td[8]/text()").get().strip())
             item["available"] = safe_int(row.xpath("td[9]/text()").get().strip())
-
+            item["banner"] = self.banner
+            item["date"] = self.date
             yield item
 
 

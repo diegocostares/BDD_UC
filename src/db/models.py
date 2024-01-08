@@ -1,6 +1,6 @@
 import uuid
 
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import declarative_base, relationship
 
@@ -89,7 +89,8 @@ class CourseSectionBannerVacancy(Base):
 
     id = Column(UUID, primary_key=True, default=uuid.uuid4)
     course_section_id = Column(UUID, ForeignKey("course_section.id"))
-    banner = Column(Integer)
+    banner = Column(String)
+    date = Column(DateTime)
     course_section = relationship("CourseSection", back_populates="banner_vacancies")
     vacancy_details = relationship("VacancyDetail", back_populates="course_section_banner_vacancy")
 
